@@ -26,7 +26,7 @@ public class HelloWorldService {
 	private ServiceProperties configuration;
 
 	public String getHelloMessage() {
-		return "Hello " + this.configuration.getName();
+		return "Hi " + this.configuration.getName();
 	}
 
 }
