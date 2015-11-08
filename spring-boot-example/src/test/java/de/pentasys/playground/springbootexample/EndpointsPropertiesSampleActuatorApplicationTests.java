@@ -32,6 +32,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Integration tests for endpoints configuration.
@@ -67,6 +68,6 @@ public class EndpointsPropertiesSampleActuatorApplicationTests {
 				"http://localhost:" + this.port + "/admin/health", String.class);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
 		String body = entity.getBody();
-		assertEquals("ok", body);
+		assertTrue(body.contains("\"status\" : \"UP\""));
 	}
 }

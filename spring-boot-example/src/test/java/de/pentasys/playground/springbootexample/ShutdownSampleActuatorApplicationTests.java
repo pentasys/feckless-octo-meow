@@ -56,7 +56,7 @@ public class ShutdownSampleActuatorApplicationTests {
 	@Test
 	public void testHome() throws Exception {
 		@SuppressWarnings("rawtypes")
-		ResponseEntity<Map> entity = new TestRestTemplate("user", getPassword())
+		ResponseEntity<Map> entity = new TestRestTemplate("admin", getPassword())
 				.getForEntity("http://localhost:" + this.port, Map.class);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
 		@SuppressWarnings("unchecked")
@@ -67,7 +67,7 @@ public class ShutdownSampleActuatorApplicationTests {
 	@Test
 	public void testShutdown() throws Exception {
 		@SuppressWarnings("rawtypes")
-		ResponseEntity<Map> entity = new TestRestTemplate("user", getPassword())
+		ResponseEntity<Map> entity = new TestRestTemplate("admin", getPassword())
 				.postForEntity("http://localhost:" + this.port + "/shutdown", null,
 						Map.class);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
@@ -78,7 +78,7 @@ public class ShutdownSampleActuatorApplicationTests {
 	}
 
 	private String getPassword() {
-		return this.security.getUser().getPassword();
+		return "s3cr3t";
 	}
 
 }

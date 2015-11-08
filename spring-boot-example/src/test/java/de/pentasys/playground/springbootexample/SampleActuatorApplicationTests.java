@@ -94,7 +94,7 @@ public class SampleActuatorApplicationTests {
 	@Test
 	public void testHome() throws Exception {
 		@SuppressWarnings("rawtypes")
-		ResponseEntity<Map> entity = new TestRestTemplate("user", getPassword())
+		ResponseEntity<Map> entity = new TestRestTemplate("admin", getPassword())
 				.getForEntity("http://localhost:" + this.port, Map.class);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
 		@SuppressWarnings("unchecked")
@@ -106,7 +106,7 @@ public class SampleActuatorApplicationTests {
 	public void testMetrics() throws Exception {
 		testHome(); // makes sure some requests have been made
 		@SuppressWarnings("rawtypes")
-		ResponseEntity<Map> entity = new TestRestTemplate("user", getPassword())
+		ResponseEntity<Map> entity = new TestRestTemplate("admin", getPassword())
 				.getForEntity("http://localhost:" + this.port + "/metrics", Map.class);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
 		@SuppressWarnings("unchecked")
@@ -117,7 +117,7 @@ public class SampleActuatorApplicationTests {
 	@Test
 	public void testEnv() throws Exception {
 		@SuppressWarnings("rawtypes")
-		ResponseEntity<Map> entity = new TestRestTemplate("user", getPassword())
+		ResponseEntity<Map> entity = new TestRestTemplate("admin", getPassword())
 				.getForEntity("http://localhost:" + this.port + "/env", Map.class);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
 		@SuppressWarnings("unchecked")
@@ -130,17 +130,17 @@ public class SampleActuatorApplicationTests {
 		ResponseEntity<String> entity = new TestRestTemplate().getForEntity(
 				"http://localhost:" + this.port + "/health", String.class);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
-		assertEquals("ok", entity.getBody());
+        assertTrue(entity.getBody().contains("\"status\" : \"UP\""));
 	}
 
 	@Test
 	public void testErrorPage() throws Exception {
-		ResponseEntity<String> entity = new TestRestTemplate("user", getPassword())
+		ResponseEntity<String> entity = new TestRestTemplate("admin", getPassword())
 				.getForEntity("http://localhost:" + this.port + "/foo", String.class);
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, entity.getStatusCode());
 		String body = entity.getBody();
 		assertNotNull(body);
-		assertTrue("Wrong body: " + body, body.contains("\"error\":"));
+		assertTrue("Wrong body: " + body, body.contains("Internal Server Error"));
 	}
 
 	@Test
@@ -148,7 +148,7 @@ public class SampleActuatorApplicationTests {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.TEXT_HTML));
 		HttpEntity<?> request = new HttpEntity<Void>(headers);
-		ResponseEntity<String> entity = new TestRestTemplate("user", getPassword())
+		ResponseEntity<String> entity = new TestRestTemplate("admin", getPassword())
 				.exchange("http://localhost:" + this.port + "/foo", HttpMethod.GET,
 						request, String.class);
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, entity.getStatusCode());
@@ -163,7 +163,7 @@ public class SampleActuatorApplicationTests {
 		new TestRestTemplate().getForEntity("http://localhost:" + this.port + "/health",
 				String.class);
 		@SuppressWarnings("rawtypes")
-		ResponseEntity<List> entity = new TestRestTemplate("user", getPassword())
+		ResponseEntity<List> entity = new TestRestTemplate("admin", getPassword())
 				.getForEntity("http://localhost:" + this.port + "/trace", List.class);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
 		@SuppressWarnings("unchecked")
@@ -190,7 +190,7 @@ public class SampleActuatorApplicationTests {
 	@Test
 	public void testBeans() throws Exception {
 		@SuppressWarnings("rawtypes")
-		ResponseEntity<List> entity = new TestRestTemplate("user", getPassword())
+		ResponseEntity<List> entity = new TestRestTemplate("admin", getPassword())
 				.getForEntity("http://localhost:" + this.port + "/beans", List.class);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
 		assertEquals(1, entity.getBody().size());
@@ -201,7 +201,7 @@ public class SampleActuatorApplicationTests {
 	}
 
 	private String getPassword() {
-		return this.security.getUser().getPassword();
+		return "s3cr3t";
 	}
 
 }

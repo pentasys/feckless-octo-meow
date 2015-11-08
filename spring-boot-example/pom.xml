@@ -6,14 +6,14 @@
 		<!-- Your own application should inherit from spring-boot-starter-parent -->
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.0.2.RELEASE</version>
+		<version>1.2.7.RELEASE</version>
 	</parent>
 
     <artifactId>spring-boot-example</artifactId>
 	<groupId>de.pentasys.playground</groupId>
 	<name>Spring Boot Actuator Sample</name>
 	<description>Spring Boot Actuator Sample</description>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.2.0-SNAPSHOT</version>
 	<url>http://projects.spring.io/spring-boot/</url>
 
     <organization>
@@ -58,6 +58,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<configuration>
+					<dotGitDirectory>../.git</dotGitDirectory>
+					<generateGitPropertiesFilename>src/main/resources/git.properties</generateGitPropertiesFilename>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

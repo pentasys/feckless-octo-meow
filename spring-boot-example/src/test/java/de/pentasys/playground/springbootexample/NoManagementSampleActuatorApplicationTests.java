@@ -55,7 +55,7 @@ public class NoManagementSampleActuatorApplicationTests {
 	@Test
 	public void testHome() throws Exception {
 		@SuppressWarnings("rawtypes")
-		ResponseEntity<Map> entity = new TestRestTemplate("user", getPassword())
+		ResponseEntity<Map> entity = new TestRestTemplate("admin", getPassword())
 				.getForEntity("http://localhost:" + this.port, Map.class);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
 		@SuppressWarnings("unchecked")
@@ -67,13 +67,13 @@ public class NoManagementSampleActuatorApplicationTests {
 	public void testMetricsNotAvailable() throws Exception {
 		testHome(); // makes sure some requests have been made
 		@SuppressWarnings("rawtypes")
-		ResponseEntity<Map> entity = new TestRestTemplate("user", getPassword())
+		ResponseEntity<Map> entity = new TestRestTemplate("admin", getPassword())
 				.getForEntity("http://localhost:" + this.port + "/metrics", Map.class);
 		assertEquals(HttpStatus.NOT_FOUND, entity.getStatusCode());
 	}
 
 	private String getPassword() {
-		return this.security.getUser().getPassword();
+		return "s3cr3t";
 	}
 
 }
