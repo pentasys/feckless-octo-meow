@@ -60,6 +60,22 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
+		        <artifactId>maven-assembly-plugin</artifactId>
+		        <version>2.6</version>
+		        <configuration>
+		         	<descriptor>src/assembly/dep.xml</descriptor>
+		        </configuration>
+		        <executions>
+		          	<execution>
+		            	<id>create-archive</id>
+		            	<phase>package</phase>
+		            	<goals>
+		              		<goal>single</goal>
+		            	</goals>
+		          	</execution>
+		    	</executions>
+		    </plugin>
+			<plugin>
 				<groupId>pl.project13.maven</groupId>
 				<artifactId>git-commit-id-plugin</artifactId>
 				<configuration>
@@ -68,5 +84,14 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>appspec.yml</exclude>
+					<exclude>scripts/*.sh</exclude>
+				</excludes>
+			</resource>
+		</resources>
 	</build>
 </project>
