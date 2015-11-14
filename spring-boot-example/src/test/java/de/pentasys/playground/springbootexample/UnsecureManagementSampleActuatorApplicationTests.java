@@ -66,12 +66,6 @@ public class UnsecureManagementSampleActuatorApplicationTests {
 
 	@Test
 	public void testMetrics() throws Exception {
-        try {
-            testHomeIsSecure(); // makes sure some requests have been made
-        }
-        catch (AssertionError ex) {
-            // ignore;
-        }
 		@SuppressWarnings("rawtypes")
 		ResponseEntity<Map> entity = new TestRestTemplate().getForEntity(
 				"http://localhost:" + this.port + "/metrics", Map.class);
