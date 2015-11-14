@@ -42,38 +42,38 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SampleActuatorApplication.class)
 @WebAppConfiguration
-@IntegrationTest({ "server.port=0", "management.port=-1" })
+@IntegrationTest({"server.port=0", "management.port=-1"})
 @DirtiesContext
 public class NoManagementSampleActuatorApplicationTests {
 
-	@Autowired
-	private SecurityProperties security;
+    @Autowired
+    private SecurityProperties security;
 
-	@Value("${local.server.port}")
-	private int port = 0;
+    @Value("${local.server.port}")
+    private int port = 0;
 
-	@Test
-	public void testHome() throws Exception {
-		@SuppressWarnings("rawtypes")
-		ResponseEntity<Map> entity = new TestRestTemplate("admin", getPassword())
-				.getForEntity("http://localhost:" + this.port, Map.class);
-		assertEquals(HttpStatus.OK, entity.getStatusCode());
-		@SuppressWarnings("unchecked")
-		Map<String, Object> body = entity.getBody();
-		assertEquals("Hello Phil", body.get("message"));
-	}
+    @Test
+    public void testHome() throws Exception {
+        @SuppressWarnings("rawtypes")
+        ResponseEntity<Map> entity = new TestRestTemplate("admin", getPassword())
+                .getForEntity("http://localhost:" + this.port, Map.class);
+        assertEquals(HttpStatus.OK, entity.getStatusCode());
+        @SuppressWarnings("unchecked")
+        Map<String, Object> body = entity.getBody();
+        assertEquals("Hello Phil", body.get("message"));
+    }
 
-	@Test
-	public void testMetricsNotAvailable() throws Exception {
-		testHome(); // makes sure some requests have been made
-		@SuppressWarnings("rawtypes")
-		ResponseEntity<Map> entity = new TestRestTemplate("admin", getPassword())
-				.getForEntity("http://localhost:" + this.port + "/metrics", Map.class);
-		assertEquals(HttpStatus.NOT_FOUND, entity.getStatusCode());
-	}
+    @Test
+    public void testMetricsNotAvailable() throws Exception {
+        testHome(); // makes sure some requests have been made
+        @SuppressWarnings("rawtypes")
+        ResponseEntity<Map> entity = new TestRestTemplate("admin", getPassword())
+                .getForEntity("http://localhost:" + this.port + "/metrics", Map.class);
+        assertEquals(HttpStatus.NOT_FOUND, entity.getStatusCode());
+    }
 
-	private String getPassword() {
-		return "s3cr3t";
-	}
+    private String getPassword() {
+        return "s3cr3t";
+    }
 
 }

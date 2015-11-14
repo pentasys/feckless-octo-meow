@@ -42,24 +42,24 @@ import static org.junit.Assert.assertFalse;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SampleActuatorApplication.class)
 @WebAppConfiguration
-@IntegrationTest({ "server.port:0", "security.basic.enabled:false" })
+@IntegrationTest({"server.port:0", "security.basic.enabled:false"})
 @DirtiesContext
 public class UnsecureSampleActuatorApplicationTests {
 
-	@Value("${local.server.port}")
-	private int port;
+    @Value("${local.server.port}")
+    private int port;
 
-	@Test
-	public void testHome() throws Exception {
-		@SuppressWarnings("rawtypes")
-		ResponseEntity<Map> entity = new TestRestTemplate().getForEntity(
-				"http://localhost:" + this.port, Map.class);
-		assertEquals(HttpStatus.OK, entity.getStatusCode());
-		@SuppressWarnings("unchecked")
-		Map<String, Object> body = entity.getBody();
-		assertEquals("Hello Phil", body.get("message"));
-		assertFalse("Wrong headers: " + entity.getHeaders(), entity.getHeaders()
-				.containsKey("Set-Cookie"));
-	}
+    @Test
+    public void testHome() throws Exception {
+        @SuppressWarnings("rawtypes")
+        ResponseEntity<Map> entity = new TestRestTemplate().getForEntity(
+                "http://localhost:" + this.port, Map.class);
+        assertEquals(HttpStatus.OK, entity.getStatusCode());
+        @SuppressWarnings("unchecked")
+        Map<String, Object> body = entity.getBody();
+        assertEquals("Hello Phil", body.get("message"));
+        assertFalse("Wrong headers: " + entity.getHeaders(), entity.getHeaders()
+                .containsKey("Set-Cookie"));
+    }
 
 }

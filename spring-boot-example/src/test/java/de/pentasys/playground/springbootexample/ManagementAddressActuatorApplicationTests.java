@@ -43,36 +43,36 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SampleActuatorApplication.class)
 @WebAppConfiguration
-@IntegrationTest({ "server.port=0", "management.port=0", "management.address=127.0.0.1",
-		"management.contextPath:/admin" })
+@IntegrationTest({"server.port=0", "management.port=0", "management.address=127.0.0.1",
+        "management.contextPath:/admin"})
 @DirtiesContext
 public class ManagementAddressActuatorApplicationTests {
 
-	@Autowired
-	private SecurityProperties security;
+    @Autowired
+    private SecurityProperties security;
 
-	@Value("${local.server.port}")
-	private int port = 9010;
+    @Value("${local.server.port}")
+    private int port = 9010;
 
-	@Value("${local.management.port}")
-	private int managementPort = 9011;
+    @Value("${local.management.port}")
+    private int managementPort = 9011;
 
-	@Test
-	public void testHome() throws Exception {
-		@SuppressWarnings("rawtypes")
-		ResponseEntity<Map> entity = new TestRestTemplate().getForEntity(
-				"http://localhost:" + this.port, Map.class);
-		assertEquals(HttpStatus.UNAUTHORIZED, entity.getStatusCode());
-	}
+    @Test
+    public void testHome() throws Exception {
+        @SuppressWarnings("rawtypes")
+        ResponseEntity<Map> entity = new TestRestTemplate().getForEntity(
+                "http://localhost:" + this.port, Map.class);
+        assertEquals(HttpStatus.UNAUTHORIZED, entity.getStatusCode());
+    }
 
-	@Test
-	public void testHealth() throws Exception {
-		ResponseEntity<String> entity = new TestRestTemplate()
-				.getForEntity(
-						"http://localhost:" + this.managementPort + "/admin/health",
-						String.class);
-		assertEquals(HttpStatus.OK, entity.getStatusCode());
+    @Test
+    public void testHealth() throws Exception {
+        ResponseEntity<String> entity = new TestRestTemplate()
+                .getForEntity(
+                        "http://localhost:" + this.managementPort + "/admin/health",
+                        String.class);
+        assertEquals(HttpStatus.OK, entity.getStatusCode());
         assertTrue(entity.getBody().contains("\"status\" : \"UP\""));
-	}
+    }
 
 }

@@ -47,27 +47,27 @@ import static org.junit.Assert.assertTrue;
 @ActiveProfiles("endpoints")
 public class EndpointsPropertiesSampleActuatorApplicationTests {
 
-	@Value("${local.server.port}")
-	private int port;
+    @Value("${local.server.port}")
+    private int port;
 
-	@Test
-	public void testCustomErrorPath() throws Exception {
-		@SuppressWarnings("rawtypes")
-		ResponseEntity<Map> entity = new TestRestTemplate("user", "password")
-				.getForEntity("http://localhost:" + this.port + "/oops", Map.class);
-		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, entity.getStatusCode());
-		@SuppressWarnings("unchecked")
-		Map<String, Object> body = entity.getBody();
-		assertEquals("None", body.get("error"));
-		assertEquals(999, body.get("status"));
-	}
+    @Test
+    public void testCustomErrorPath() throws Exception {
+        @SuppressWarnings("rawtypes")
+        ResponseEntity<Map> entity = new TestRestTemplate("user", "password")
+                .getForEntity("http://localhost:" + this.port + "/oops", Map.class);
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, entity.getStatusCode());
+        @SuppressWarnings("unchecked")
+        Map<String, Object> body = entity.getBody();
+        assertEquals("None", body.get("error"));
+        assertEquals(999, body.get("status"));
+    }
 
-	@Test
-	public void testCustomContextPath() throws Exception {
-		ResponseEntity<String> entity = new TestRestTemplate().getForEntity(
-				"http://localhost:" + this.port + "/admin/health", String.class);
-		assertEquals(HttpStatus.OK, entity.getStatusCode());
-		String body = entity.getBody();
-		assertTrue(body.contains("\"status\" : \"UP\""));
-	}
+    @Test
+    public void testCustomContextPath() throws Exception {
+        ResponseEntity<String> entity = new TestRestTemplate().getForEntity(
+                "http://localhost:" + this.port + "/admin/health", String.class);
+        assertEquals(HttpStatus.OK, entity.getStatusCode());
+        String body = entity.getBody();
+        assertTrue(body.contains("\"status\" : \"UP\""));
+    }
 }

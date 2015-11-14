@@ -43,60 +43,60 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SampleActuatorApplication.class)
 @WebAppConfiguration
-@IntegrationTest({ "server.port=0", "management.port=0" })
+@IntegrationTest({"server.port=0", "management.port=0"})
 @DirtiesContext
 public class ManagementPortSampleActuatorApplicationTests {
 
-	@Autowired
-	private SecurityProperties security;
+    @Autowired
+    private SecurityProperties security;
 
-	@Value("${local.server.port}")
-	private int port = 9010;
+    @Value("${local.server.port}")
+    private int port = 9010;
 
-	@Value("${local.management.port}")
-	private int managementPort = 9011;
+    @Value("${local.management.port}")
+    private int managementPort = 9011;
 
-	@Test
-	public void testHome() throws Exception {
-		@SuppressWarnings("rawtypes")
-		ResponseEntity<Map> entity = new TestRestTemplate("admin", getPassword())
-				.getForEntity("http://localhost:" + this.port, Map.class);
-		assertEquals(HttpStatus.OK, entity.getStatusCode());
-		@SuppressWarnings("unchecked")
-		Map<String, Object> body = entity.getBody();
-		assertEquals("Hello Phil", body.get("message"));
-	}
+    @Test
+    public void testHome() throws Exception {
+        @SuppressWarnings("rawtypes")
+        ResponseEntity<Map> entity = new TestRestTemplate("admin", getPassword())
+                .getForEntity("http://localhost:" + this.port, Map.class);
+        assertEquals(HttpStatus.OK, entity.getStatusCode());
+        @SuppressWarnings("unchecked")
+        Map<String, Object> body = entity.getBody();
+        assertEquals("Hello Phil", body.get("message"));
+    }
 
-	@Test
-	public void testMetrics() throws Exception {
-		testHome(); // makes sure some requests have been made
-		@SuppressWarnings("rawtypes")
-		ResponseEntity<Map> entity = new TestRestTemplate().getForEntity(
-				"http://localhost:" + this.managementPort + "/metrics", Map.class);
-		assertEquals(HttpStatus.UNAUTHORIZED, entity.getStatusCode());
-	}
+    @Test
+    public void testMetrics() throws Exception {
+        testHome(); // makes sure some requests have been made
+        @SuppressWarnings("rawtypes")
+        ResponseEntity<Map> entity = new TestRestTemplate().getForEntity(
+                "http://localhost:" + this.managementPort + "/metrics", Map.class);
+        assertEquals(HttpStatus.UNAUTHORIZED, entity.getStatusCode());
+    }
 
-	@Test
-	public void testHealth() throws Exception {
-		ResponseEntity<String> entity = new TestRestTemplate("admin", getPassword()).getForEntity(
-				"http://localhost:" + this.managementPort + "/health", String.class);
-		assertEquals(HttpStatus.OK, entity.getStatusCode());
+    @Test
+    public void testHealth() throws Exception {
+        ResponseEntity<String> entity = new TestRestTemplate("admin", getPassword()).getForEntity(
+                "http://localhost:" + this.managementPort + "/health", String.class);
+        assertEquals(HttpStatus.OK, entity.getStatusCode());
         assertTrue(entity.getBody().contains("\"status\" : \"UP\""));
-	}
+    }
 
-	@Test
-	public void testErrorPage() throws Exception {
-		@SuppressWarnings("rawtypes")
-		ResponseEntity<Map> entity = new TestRestTemplate().getForEntity(
-				"http://localhost:" + this.managementPort + "/error", Map.class);
-		assertEquals(HttpStatus.OK, entity.getStatusCode());
-		@SuppressWarnings("unchecked")
-		Map<String, Object> body = entity.getBody();
-		assertEquals(999, body.get("status"));
-	}
+    @Test
+    public void testErrorPage() throws Exception {
+        @SuppressWarnings("rawtypes")
+        ResponseEntity<Map> entity = new TestRestTemplate().getForEntity(
+                "http://localhost:" + this.managementPort + "/error", Map.class);
+        assertEquals(HttpStatus.OK, entity.getStatusCode());
+        @SuppressWarnings("unchecked")
+        Map<String, Object> body = entity.getBody();
+        assertEquals(999, body.get("status"));
+    }
 
-	private String getPassword() {
-		return "s3cr3t";
-	}
+    private String getPassword() {
+        return "s3cr3t";
+    }
 
 }

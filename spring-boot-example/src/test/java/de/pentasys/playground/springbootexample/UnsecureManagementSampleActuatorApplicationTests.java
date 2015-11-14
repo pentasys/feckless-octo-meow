@@ -33,7 +33,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Integration tests for unsecured service endpoints (even with Spring Security on
@@ -67,19 +66,10 @@ public class UnsecureManagementSampleActuatorApplicationTests {
 
 	@Test
 	public void testMetrics() throws Exception {
-		try {
-			testHomeIsSecure(); // makes sure some requests have been made
-		}
-		catch (AssertionError ex) {
-			// ignore;
-		}
 		@SuppressWarnings("rawtypes")
 		ResponseEntity<Map> entity = new TestRestTemplate().getForEntity(
 				"http://localhost:" + this.port + "/metrics", Map.class);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
-		@SuppressWarnings("unchecked")
-		Map<String, Object> body = entity.getBody();
-		assertTrue("Wrong body: " + body, body.containsKey("counter.status.401.unmapped"));
 	}
 
 }
