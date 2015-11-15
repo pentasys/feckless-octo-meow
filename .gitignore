@@ -1,4 +1,8 @@
+.gradle
 .idea
 spring-boot-example.iml
 git.properties
 target
+bower_components
+dist
+node_modules

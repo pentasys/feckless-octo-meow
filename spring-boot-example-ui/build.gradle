@@ -1,0 +1,43 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+    dependencies {
+        classpath 'com.moowork.gradle:gradle-gulp-plugin:0.11'
+    }
+}
+
+apply plugin: 'com.moowork.gulp'
+
+task bowerInstall(type: Exec) {
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        commandLine 'cmd', '/c', 'node_modules\bower\bin\bower', 'install'
+    } else {
+        commandLine './node_modules/bower/bin/bower', 'install'
+    }
+}
+
+task build() {}
+gulp_distribute.dependsOn nodeSetup
+gulp_distribute.dependsOn npmInstall
+gulp_distribute.dependsOn installGulp
+gulp_distribute.dependsOn bowerInstall
+bowerInstall.dependsOn npmInstall
+build.dependsOn gulp_distribute
+
+gulp {
+    // Set the directory where gulpfile.js should be found
+    workDir = file("${project.projectDir}")
+    colors = true
+    bufferOutput = false
+}
+
+node {
+    version = '4.2.2'
+    download = true
+}
