@@ -46,11 +46,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<!--<dependency> <groupId>org.crashub</groupId> <artifactId>crash.connectors.telnet</artifactId>
-			<exclusions> <exclusion> <groupId>log4j</groupId> <artifactId>log4j</artifactId>
-			</exclusion> <exclusion> <groupId>commons-logging</groupId> <artifactId>commons-logging</artifactId>
-			</exclusion> </exclusions> </dependency> -->
+        </dependency>
 	</dependencies>
 
     <build>
@@ -60,22 +56,6 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-		        <artifactId>maven-assembly-plugin</artifactId>
-		        <version>2.6</version>
-		        <configuration>
-		         	<descriptor>src/assembly/dep.xml</descriptor>
-		        </configuration>
-		        <executions>
-		          	<execution>
-		            	<id>create-archive</id>
-		            	<phase>package</phase>
-		            	<goals>
-		              		<goal>single</goal>
-		            	</goals>
-		          	</execution>
-		    	</executions>
-		    </plugin>
-			<plugin>
 				<groupId>pl.project13.maven</groupId>
 				<artifactId>git-commit-id-plugin</artifactId>
 				<configuration>
@@ -83,13 +63,35 @@
 					<generateGitPropertiesFilename>src/main/resources/git.properties</generateGitPropertiesFilename>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <echo message="Prepare resources for AWS CodeDeploy" />
+                                <copy todir="${project.build.directory}/dist">
+                                    <fileset dir="${basedir}/src/main/resources/deployment" />
+                                </copy>
+                                <copy file="${project.build.directory}/${artifactId}-${project.version}.${project.packaging}"
+                                      tofile="${project.build.directory}/dist/app.jar"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 		<resources>
 			<resource>
+                <filtering>true</filtering>
 				<directory>src/main/resources</directory>
 				<excludes>
-					<exclude>appspec.yml</exclude>
-					<exclude>scripts/*.sh</exclude>
+					<exclude>deployment/**</exclude>
 				</excludes>
 			</resource>
 		</resources>

@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: / 
+  - source: app.jar
     destination: /opt/blackpearl
 hooks:
   ApplicationStop:
@@ -10,10 +10,6 @@ hooks:
       runas: root
   BeforeInstall:
     - location: scripts/prepare_deployment.sh
-      timeout: 300
-      runas: root
-  AfterInstall:
-    - location: scripts/change_filename.sh
       timeout: 300
       runas: root
   ApplicationStart:
