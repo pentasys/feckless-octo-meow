@@ -78,7 +78,7 @@
                                 <copy todir="${project.build.directory}/dist">
                                     <fileset dir="${basedir}/src/main/resources/deployment" />
                                 </copy>
-                                <copy file="${project.build.directory}/${artifactId}-${project.version}.${project.packaging}"
+                                <copy file="${project.build.directory}/${project.artifactId}-${project.version}.${project.packaging}"
                                       tofile="${project.build.directory}/dist/app.jar"/>
                             </target>
                         </configuration>
