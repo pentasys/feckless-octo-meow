@@ -19,8 +19,12 @@ public class SimpleCORSFilter implements Filter {
         chain.doFilter(req, res);
     }
 
-    public void init(FilterConfig filterConfig) {}
+    public void init(FilterConfig filterConfig) {
+        throw new UnsupportedOperationException();
+    }
 
-    public void destroy() {}
+    public void destroy() {
+        throw new UnsupportedOperationException();
+    }
 
 }
