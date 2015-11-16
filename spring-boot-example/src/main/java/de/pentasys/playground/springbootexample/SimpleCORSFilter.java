@@ -20,11 +20,11 @@ public class SimpleCORSFilter implements Filter {
     }
 
     public void init(FilterConfig filterConfig) {
-        throw new UnsupportedOperationException();
+        // todo
     }
 
     public void destroy() {
-        throw new UnsupportedOperationException();
+        // todo
     }
 
 }
