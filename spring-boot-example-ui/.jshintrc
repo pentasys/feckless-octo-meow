@@ -1,3 +1,14 @@
 {
-    "predef": ["angular"]
+    "curly": true,
+    "eqeqeq": true,
+    "forin": true,
+    "globals": {"app": true},
+    "latedef": true,
+    "maxcomplexity": "10",
+    "maxdepth": "5",
+    "maxstatements": "50",
+    "predef": ["angular"],
+    "strict": true,
+    "undef": true,
+    "unused": true
 }

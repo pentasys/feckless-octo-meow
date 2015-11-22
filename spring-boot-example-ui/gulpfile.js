@@ -16,10 +16,10 @@ var defaultTasks = ["scripts", "libs", "sass", "html-files"];
 
 gulp.task("scripts", function() {
     return gulp.src(config.scripts.src)
-        .pipe(sourcemaps.init())
-        .pipe(concat(config.scripts.dest_filename))
         .pipe(jshint())
         .pipe(jshint.reporter("default"))
+        .pipe(sourcemaps.init())
+        .pipe(concat(config.scripts.dest_filename))
         .pipe(uglify())
         .pipe(sourcemaps.write("./"))
         .pipe(gulp.dest(config.output.dest + config.scripts.dest))
