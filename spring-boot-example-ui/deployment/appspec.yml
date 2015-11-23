@@ -4,9 +4,9 @@ files:
   - source: index.html 
     destination: /opt/blackpearl/www
   - source: scripts
-    destination: /opt/blackpearl/www
+    destination: /opt/blackpearl/www/scripts
   - source: styles
-    destination: /opt/blackpearl/www
+    destination: /opt/blackpearl/www/styles
 hooks:
   ApplicationStop:
     - location: stop_server.sh
