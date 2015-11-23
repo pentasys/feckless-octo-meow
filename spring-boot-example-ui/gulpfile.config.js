@@ -11,7 +11,7 @@ module.exports = {
         dest : "./dist"
     },
     scripts : {
-        src           : ["./app/**/*.js", "!./app/bower_components", "!./app/bower_components/**"],
+        src           : "./app/**/*.js",
         dest          : "/scripts",
         dest_filename : "app.all.min.js"
     },
@@ -24,6 +24,9 @@ module.exports = {
         src           : "./app/css/*{.scss,.css}",
         dest          : "/styles",
         dest_filename : "app-style.min.css"
+    },
+    deployment : {
+        src           : "./deployment/*"
     },
     html : {
         src  : "./app/index.html"

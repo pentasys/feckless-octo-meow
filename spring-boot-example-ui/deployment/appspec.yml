@@ -1,0 +1,26 @@
+version: 0.0
+os: linux
+files:
+  - source: index.html 
+    destination: /opt/blackpearl/www
+  - source: scripts
+    destination: /opt/blackpearl/www
+  - source: styles
+    destination: /opt/blackpearl/www
+hooks:
+  ApplicationStop:
+    - location: stop_server.sh
+      timeout: 300
+      runas: root
+  BeforeInstall:
+    - location: prepare_deployment.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: start_server.sh
+      timeout: 300
+      runas: root
+  ValidationService:
+    - location: validate_deployment.sh
+      timeout: 300
+      runas: root

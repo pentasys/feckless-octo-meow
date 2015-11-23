@@ -12,7 +12,7 @@ var livereload    = require("gulp-livereload");
 var watch         = require('gulp-watch');
 var jshint        = require("gulp-jshint");
 
-var defaultTasks = ["scripts", "libs", "sass", "html-files"];
+var defaultTasks = ["scripts", "libs", "sass", "html-files", "deployment-spec"];
 
 gulp.task("scripts", function() {
     return gulp.src(config.scripts.src)
@@ -43,6 +43,11 @@ gulp.task("html-files", function() {
     return gulp.src(config.html.src)
         .pipe(gulp.dest(config.output.dest))
         .pipe(livereload());
+});
+
+gulp.task("deployment-spec", function() {
+    return gulp.src(config.deployment.src)
+        .pipe(gulp.dest(config.output.dest));
 });
 
 gulp.task("watch", function() {
