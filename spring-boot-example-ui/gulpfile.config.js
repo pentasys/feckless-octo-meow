@@ -1,6 +1,6 @@
 module.exports = {
     server : {
-        port : 80
+        port : 8081
     },
     directories : {
         app_dir      : "./app",
