@@ -1,7 +1,12 @@
 {
   "name": "spring-boot-example-ui",
+  "description": "UI built with AngularJS",
   "version": "0.1.0",
-  "repository": {},
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pentasys/feckless-octo-meow.git"
+  },
   "devDependencies": {
     "bower": "1.6.5",
     "cli-js": "0.0.8",
@@ -22,7 +27,9 @@
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-jasmine": "~0.3",
     "karma-junit-reporter": "~0.3",
-    "karma-coverage": "~0.5"
+    "karma-coverage": "~0.5",
+    "lodash": "^3.0.0",
+    "phantomjs": ">=1.9"
   },
   "engines": {
     "node": ">=4.2.2"

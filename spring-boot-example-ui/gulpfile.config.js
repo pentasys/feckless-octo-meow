@@ -8,7 +8,7 @@ module.exports = {
         bower_dir     : "./bower_components"
     },
     output : {
-        dest          : "./dist"
+        dest          : "target/dist"
     },
     scripts : {
         src           : "./app/**/*.js",

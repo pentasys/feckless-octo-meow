@@ -14,8 +14,6 @@ buildscript {
 
 apply plugin: 'com.moowork.gulp'
 
-defaultTasks "run"
-
 task bowerInstall(type: Exec, dependsOn: "npmInstall") {
     description("Install runtime dependencies.")
     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
@@ -38,11 +36,6 @@ task build(dependsOn: ["setup", "gulp_build"]) {
     description("Run 'gulp build'")
 }
 gulp_build.mustRunAfter setup
-
-task run(dependsOn: ["setup", "gulp_default"]) {
-    description("Run 'gulp'")
-}
-gulp_default.mustRunAfter setup
 
 gulp {
     // Set the directory where gulpfile.js should be found
