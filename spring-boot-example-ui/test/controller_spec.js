@@ -1,4 +1,4 @@
-describe('controller', function() {
+describe('controller_spec', function() {
     beforeEach(module('spring-boot-example'));
 
     var $controller;
