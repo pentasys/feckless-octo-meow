@@ -11,8 +11,20 @@ var connect       = require("gulp-connect");
 var livereload    = require("gulp-livereload");
 var watch         = require('gulp-watch');
 var jshint        = require("gulp-jshint");
+var karma         = require('karma');
 
-var defaultTasks = ["scripts", "libs", "sass", "html-files", "deployment-spec"];
+var defaultTasks = ["scripts", "libs", "sass", "html-files"];
+
+
+/**
+ * Run test once and exit
+ */
+gulp.task('test', function (done) {
+  new karma.Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
 
 gulp.task("scripts", function() {
     return gulp.src(config.scripts.src)
@@ -73,4 +85,4 @@ gulp.task("default", ["server"].concat(defaultTasks).concat(["watch"]));
 /**
  * Distribution Task -> Set isProduction to true!
  */
-gulp.task("distribute", defaultTasks);
+gulp.task("build", defaultTasks.concat(["deployment-spec"]));

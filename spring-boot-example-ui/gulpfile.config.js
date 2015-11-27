@@ -1,14 +1,14 @@
 module.exports = {
     server : {
-        port : 8081
+        port          : 8081
     },
     directories : {
-        app_dir      : "./app",
-        app_sass_dir : "./app/css",
-        bower_dir    : "./bower_components"
+        app_dir       : "./app",
+        app_sass_dir  : "./app/css",
+        bower_dir     : "./bower_components"
     },
     output : {
-        dest : "./dist"
+        dest          : "./dist"
     },
     scripts : {
         src           : "./app/**/*.js",
@@ -29,6 +29,6 @@ module.exports = {
         src           : "./deployment/*"
     },
     html : {
-        src  : "./app/index.html"
+        src           : "./app/index.html"
     }
 };
