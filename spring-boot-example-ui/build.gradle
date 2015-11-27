@@ -32,14 +32,17 @@ task setup(dependsOn: ["nodeSetup", "npmInstall", "installGulp", "bowerInstall"]
 task test(dependsOn: ["setup", "gulp_test"]) {
     description("Run 'gulp test'")
 }
+gulp_test.mustRunAfter setup
 
 task build(dependsOn: ["setup", "gulp_build"]) {
     description("Run 'gulp build'")
 }
+gulp_build.mustRunAfter setup
 
 task run(dependsOn: ["setup", "gulp_default"]) {
     description("Run 'gulp'")
 }
+gulp_default.mustRunAfter setup
 
 gulp {
     // Set the directory where gulpfile.js should be found
