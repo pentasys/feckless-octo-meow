@@ -41,22 +41,20 @@ module.exports = function(config) {
 
 
     junitReporter: {
-      outputDir: 'target/karma-reports',
-      outputFile: 'TEST-results.xml',
-      suite: '',
-      useBrowserName: false
+      outputFile: 'target/karma-reports/TEST-results.xml',
+      suite: ''
     },
 
 
     coverageReporter: {
       dir: 'target/karma-reports',
-      type: 'lcov',
+      type: 'lcovonly',
       subdir: '.'
     },
 
 
     // web server port
-    port: 9876,
+    port: 9899,
 
 
     // enable / disable colors in the output (reporters and logs)
