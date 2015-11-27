@@ -1,4 +1,4 @@
-describe('ctrl test', function() {
+describe('controller', function() {
     beforeEach(module('spring-boot-example'));
 
     var $controller;
