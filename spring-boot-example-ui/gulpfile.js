@@ -2,6 +2,7 @@ var gulp    = require("gulp");
 var plugins = require("gulp-load-plugins")({lazy:false});
 var config  = require("./gulpfile.config");
 
+var bower         = require("gulp-bower");
 var concat        = require("gulp-concat");
 var sourcemaps    = require("gulp-sourcemaps");
 var uglify        = require("gulp-uglify");
@@ -13,7 +14,7 @@ var watch         = require('gulp-watch');
 var jshint        = require("gulp-jshint");
 var karma         = require('karma');
 
-var defaultTasks = ["scripts", "libs", "sass", "html-files"];
+var defaultTasks = ["bower", "scripts", "libs", "sass", "fonts", "html-files"];
 
 
 /**
@@ -25,6 +26,11 @@ gulp.task('test', function (done) {
     singleRun: true
   }, done).start();
 });
+
+gulp.task("bower", function() {
+    return bower()
+        .pipe(gulp.dest('bower_components/'));
+})
 
 gulp.task("scripts", function() {
     return gulp.src(config.scripts.src)
@@ -50,6 +56,12 @@ gulp.task("sass", function() {
         .pipe(gulp.dest(config.output.dest + config.styles.dest))
         .pipe(livereload());
 });
+
+gulp.task("fonts", function() {
+    return gulp.src(config.directories.bower_dir + "/bootstrap-sass-official/assets/fonts/**/*")
+        .pipe(gulp.dest(config.output.dest + config.fonts.dest))
+        .pipe(livereload());
+})
 
 gulp.task("html-files", function() {
     return gulp.src(config.html.src)

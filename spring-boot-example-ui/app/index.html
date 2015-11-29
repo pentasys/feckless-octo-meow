@@ -7,10 +7,81 @@
 </head>
 <body>
 
-    <div class="center" ng-controller="ctrl">
-        <h1>Spring Boot Example</h1>
-        <div>{{responseData}}</div>
-        <button ng-click="onLoad()">Get Info</button>
+    <div class="container" ng-controller="ctrl">
+
+        <div class="row row-centered">
+            <div class="col-md-8 col-centered">
+                <div class="jumbotron">
+                    <h1>Spring Boot Example</h1>
+                    <p>This is a simple UI, that allows you to display information about the app. Try it yourself!
+                        Hit the button below.</p>
+                    <button class="btn btn-primary btn-lg" ng-show="!displayInfo" ng-click="loadAppInfo()">Show Info</button>
+                    <button class="btn btn-primary btn-lg" ng-show="displayInfo" ng-click="hideInfo()">Hide Info</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-centered" ng-show="displayInfo">
+            <div class="col-md-6 col-centered">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        Build-Info
+                    </div>
+                    <table ng-hide="!serverInfo" class="table">
+                        <tr>
+                            <td>Artifact:</td>
+                            <td>{{serverInfo.build.artifact}}</td>
+                        </tr>
+                        <tr>
+                            <td>Description:</td>
+                            <td>{{serverInfo.build.description}}</td>
+                        </tr>
+                        <tr>
+                            <td>Name:</td>
+                            <td>{{serverInfo.build.name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Time:</td>
+                            <td>{{serverInfo.build.time | date : 'medium'}}</td>
+                        </tr>
+                        <tr>
+                            <td>User:</td>
+                            <td>{{serverInfo.build.user}}</td>
+                        </tr>
+                        <tr>
+                            <td>Version:</td>
+                            <td>{{serverInfo.build.version}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-centered" ng-show="displayInfo">
+            <div class="col-md-6 col-centered">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+                        SCM-Info
+                    </div>
+                    <table ng-hide="!serverInfo" class="table">
+                        <tr>
+                            <td>Branch:</td>
+                            <td>{{serverInfo.git.branch}}</td>
+                        </tr>
+                        <tr>
+                            <td>Description:</td>
+                            <td>{{serverInfo.git.commit.id}}</td>
+                        </tr>
+                        <tr>
+                            <td>Name:</td>
+                            <td>{{serverInfo.git.commit.time | date : 'medium'}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="scripts/libraries.all.min.js"></script>

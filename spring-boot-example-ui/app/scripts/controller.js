@@ -1,11 +1,18 @@
 app.controller("ctrl", ["$scope", "$location", "restService", function ($scope, $location, restService) {
     "use strict";
 
-    $scope.responseData = "failed to load data";
+    $scope.displayInfo = false;
+    $scope.serverInfo = '';
 
-    $scope.onLoad = function() {
+    $scope.loadAppInfo = function() {
         restService.load("http://" + $location.host() + ":8080/info").then(function(data) {
-            $scope.responseData = JSON.stringify(data, null, '    ');
+            $scope.serverInfo = angular.fromJson(data);
+            $scope.displayInfo = true;
         });
     };
+
+    $scope.hideInfo = function() {
+        $scope.displayInfo = false;
+    };
+
 }]);

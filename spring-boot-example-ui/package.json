@@ -8,9 +8,9 @@
     "url": "https://github.com/pentasys/feckless-octo-meow.git"
   },
   "devDependencies": {
-    "bower": "1.6.5",
     "cli-js": "0.0.8",
     "gulp": "^3.8.11",
+    "gulp-bower": "0.0.11",
     "gulp-concat": "^2.5.2",
     "gulp-connect": "^2.2.0",
     "gulp-jshint": "^1.10.0",

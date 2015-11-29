@@ -25,6 +25,9 @@ module.exports = {
         dest          : "/styles",
         dest_filename : "app-style.min.css"
     },
+    fonts : {
+        dest          : "/fonts"
+    },
     deployment : {
         src           : "./deployment/*"
     },

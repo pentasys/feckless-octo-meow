@@ -1,6 +1,7 @@
 .gradle
 .idea
 spring-boot-example.iml
+spring-boot-example-ui.iml
 git.properties
 target
 bower_components

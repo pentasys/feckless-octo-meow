@@ -8,7 +8,7 @@ app.factory("restService", ["$http", "$log", function ($http, $log) {
         }
 
         function handleError(error) {
-            $log.error("Failed to load teasers. Data is " + error.data);
+            $log.error("Failed to load data: " + error.status);
         }
 
         return $http.get(url)

@@ -7,6 +7,8 @@ files:
     destination: /opt/blackpearl/www/scripts
   - source: styles
     destination: /opt/blackpearl/www/styles
+  - source: styles
+    destination: /opt/blackpearl/www/fonts
 hooks:
   ApplicationStop:
     - location: stop_server.sh

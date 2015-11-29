@@ -1,12 +1,17 @@
-.center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  height: 400px;
+@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
+
+.jumbotron {
+  margin-top: 50px;
 }
 
-.center div {
-  padding: 20px;
+/* centered columns styles */
+.row-centered {
+  text-align:center;
+}
+.col-centered {
+  display:inline-block;
+  float:none;
+  text-align:left;
+  /* inline-block space fix */
+  margin-right:-4px;
 }
