@@ -7,7 +7,7 @@ files:
     destination: /opt/blackpearl/www/scripts
   - source: styles
     destination: /opt/blackpearl/www/styles
-  - source: styles
+  - source: fonts
     destination: /opt/blackpearl/www/fonts
 hooks:
   ApplicationStop:
