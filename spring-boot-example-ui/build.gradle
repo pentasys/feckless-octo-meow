@@ -13,9 +13,11 @@ buildscript {
 apply plugin: 'com.moowork.gulp'
 
 
-task setup(dependsOn: ["nodeSetup", "npmInstall", "installGulp"]) {
-    description("Install build dependencies.")
+task setup(dependsOn: ["nodeSetup", "npmInstall", "installGulp", "gulp_bower"]) {
+    description("Install build and runtime dependencies.")
 }
+installGulp.mustRunAfter npmInstall
+gulp_bower.mustRunAfter installGulp
 
 task test(dependsOn: ["setup", "gulp_test"]) {
     description("Run 'gulp test'")
