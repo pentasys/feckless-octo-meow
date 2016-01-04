@@ -45,7 +45,7 @@ import static org.junit.Assert.assertTrue;
 @IntegrationTest("server.port=0")
 @DirtiesContext
 @ActiveProfiles("endpoints")
-public class EndpointsPropertiesSampleActuatorApplicationTests {
+public class EndpointsPropertiesSampleActuatorApplicationIT {
 
     @Value("${local.server.port}")
     private int port;
