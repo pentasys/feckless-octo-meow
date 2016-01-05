@@ -6,11 +6,23 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
+/**
+ * A response filter for CORS support
+ */
 @Component
 public class SimpleCORSFilter implements Filter {
 
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+    /**
+     * Adds CORS related headers to the servlet response
+     *
+     * @param req the servlet request
+     * @param res the servlet response
+     * @param chain the filter chain
+     * @throws IOException
+     * @throws ServletException
+     */
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
+            ServletException {
         HttpServletResponse response = (HttpServletResponse) res;
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
@@ -19,12 +31,21 @@ public class SimpleCORSFilter implements Filter {
         chain.doFilter(req, res);
     }
 
-    public void init(FilterConfig filterConfig) {
-        // todo
+    /**
+     * Note: This method is not implemented.
+     *
+     * @param filterConfig the filter configuration
+     * @throws ServletException
+     */
+    public void init(FilterConfig filterConfig) throws ServletException {
+        throw new ServletException("Method not implemented.");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void destroy() {
-        // todo
+        return;
     }
 
 }

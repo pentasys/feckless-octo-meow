@@ -19,6 +19,9 @@ package de.pentasys.playground.springbootexample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * A service for a hello message
+ */
 @Component
 public class HelloWorldService {
 

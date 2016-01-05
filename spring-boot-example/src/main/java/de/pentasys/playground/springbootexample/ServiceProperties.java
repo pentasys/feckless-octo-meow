@@ -19,6 +19,9 @@ package de.pentasys.playground.springbootexample;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+/**
+ * A service for application properties
+ */
 @ConfigurationProperties(prefix = "service", ignoreUnknownFields = false)
 @Component
 public class ServiceProperties {
