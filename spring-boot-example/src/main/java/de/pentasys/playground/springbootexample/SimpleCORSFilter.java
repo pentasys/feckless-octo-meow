@@ -32,13 +32,10 @@ public class SimpleCORSFilter implements Filter {
     }
 
     /**
-     * Note: This method is not implemented.
-     *
-     * @param filterConfig the filter configuration
-     * @throws ServletException
+     * {@inheritDoc}
      */
     public void init(FilterConfig filterConfig) throws ServletException {
-        throw new ServletException("Method not implemented.");
+        return;
     }
 
     /**
