@@ -22,12 +22,21 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * The application
+ */
 @Configuration
 @EnableAutoConfiguration
 @EnableConfigurationProperties
 @ComponentScan
 public class SampleActuatorApplication {
 
+    /**
+     * Bootstraps the application
+     *
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         SpringApplication.run(SampleActuatorApplication.class, args);
     }

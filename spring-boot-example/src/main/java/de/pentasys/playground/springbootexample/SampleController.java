@@ -25,6 +25,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * A controller for handling requests for hello messages
+ */
 @Controller
 @Description("A controller for handling requests for hello messages")
 public class SampleController {
@@ -32,6 +35,11 @@ public class SampleController {
     @Autowired
     private HelloWorldService helloWorldService;
 
+    /**
+     * Calls the HelloWorldService to get the hello message
+     *
+     * @return the message
+     */
     @RequestMapping("/")
     @ResponseBody
     public Map<String, String> helloWorld() {
@@ -39,6 +47,11 @@ public class SampleController {
                 this.helloWorldService.getHelloMessage());
     }
 
+    /**
+     * Causes a server error
+     *
+     * @throws java.lang.IllegalArgumentException
+     */
     @RequestMapping("/foo")
     @ResponseBody
     public String foo() {
