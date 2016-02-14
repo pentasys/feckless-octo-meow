@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -40,7 +41,7 @@ public class SampleController {
      *
      * @return the message
      */
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, String> helloWorld() {
         return Collections.singletonMap("message",
@@ -52,7 +53,7 @@ public class SampleController {
      *
      * @throws java.lang.IllegalArgumentException
      */
-    @RequestMapping("/foo")
+    @RequestMapping(value = "/foo", method = RequestMethod.GET)
     @ResponseBody
     public String foo() {
         throw new IllegalArgumentException("Server error");

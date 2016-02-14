@@ -16,11 +16,19 @@
 
 package de.pentasys.playground.springbootexample;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * The application
@@ -28,6 +36,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableAutoConfiguration
 @EnableConfigurationProperties
+@EnableSwagger2
 @ComponentScan
 public class SampleActuatorApplication {
 
@@ -39,6 +48,32 @@ public class SampleActuatorApplication {
      */
     public static void main(String[] args) throws Exception {
         SpringApplication.run(SampleActuatorApplication.class, args);
+    }
+
+    @Bean
+    public Docket sampleActuatorApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("actuator-api")
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build()
+                .apiInfo(apiInfo());
+    }
+
+    @Autowired
+    private ServiceProperties configuration;
+
+    private ApiInfo apiInfo() {
+        return new ApiInfo(
+                "Sample Actuator REST-API documentation",
+                "Description",
+                configuration.getVersion(),
+                "",
+                "danny.winter@pentasys.de",
+                "MIT License",
+                "https://opensource.org/licenses/MIT"
+        );
     }
 
 }
