@@ -7,3 +7,8 @@ target
 bower_components
 dist
 node_modules
+/build/
+
+.classpath
+.project
+.settings
