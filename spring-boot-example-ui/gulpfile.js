@@ -6,13 +6,13 @@ var bower         = require("gulp-bower");
 var concat        = require("gulp-concat");
 var sourcemaps    = require("gulp-sourcemaps");
 var uglify        = require("gulp-uglify");
-var sass          = require('gulp-sass');
-var minifyCss     = require("gulp-minify-css");
+var sass          = require("gulp-sass");
+var cleanCss      = require("gulp-clean-css");
 var connect       = require("gulp-connect");
 var livereload    = require("gulp-livereload");
-var watch         = require('gulp-watch');
+var watch         = require("gulp-watch");
 var jshint        = require("gulp-jshint");
-var karma         = require('karma');
+var karma         = require("karma");
 
 var defaultTasks = ["bower", "scripts", "libs", "sass", "fonts", "html-files"];
 
@@ -51,7 +51,7 @@ gulp.task("sass", function() {
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(concat(config.styles.dest_filename))
-        .pipe(minifyCss())
+        .pipe(cleanCss())
         .pipe(sourcemaps.write("/"))
         .pipe(gulp.dest(config.output.dest + config.styles.dest))
         .pipe(livereload());
